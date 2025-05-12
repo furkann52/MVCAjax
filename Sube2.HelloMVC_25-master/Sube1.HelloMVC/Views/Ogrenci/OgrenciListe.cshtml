@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Öğrenci Listesi";
+}
+
+<div class="container">
+    <h1>Öğrenci Listesi</h1>
+    
+    <div class="mb-3">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ekleModal">
+            Yeni Öğrenci Ekle
+        </button>
+    </div>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Öğrenci ID</th>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody id="ogrenciListesiTbody">
+         
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="ekleModal" tabindex="-1" aria-labelledby="ekleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ekleModalLabel">Yeni Öğrenci Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <form id="ogrenciEkleForm">
+                    <div class="mb-3">
+                        <label for="ekleAd" class="form-label">Ad</label>
+                        <input type="text" class="form-control" id="ekleAd" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ekleSoyad" class="form-label">Soyad</label>
+                        <input type="text" class="form-control" id="ekleSoyad" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="guncelleModal" tabindex="-1" aria-labelledby="guncelleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="guncelleModalLabel">Öğrenci Düzenle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <form id="ogrenciGuncelleForm">
+                    <input type="hidden" id="guncelleId">
+                    <div class="mb-3">
+                        <label for="guncelleAd" class="form-label">Ad</label>
+                        <input type="text" class="form-control" id="guncelleAd" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="guncelleSoyad" class="form-label">Soyad</label>
+                        <input type="text" class="form-control" id="guncelleSoyad" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        //  bu site.js'de 
+    </script>
+}
+

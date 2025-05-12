@@ -1,0 +1,72 @@
+﻿@model Ogrenci
+@{
+    ViewData["Title"] = "Öğrenci Detay";
+}
+
+<div class="container">
+    <h1>Öğrenci Detay (Ajax Yöntemi)</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <form id="ogrenciDetayForm">
+                <input type="hidden" id="ogrenciId" value="@Model.Ogrenciid" />
+                <div class="mb-3">
+                    <label for="ad" class="form-label">Ad</label>
+                    <input type="text" class="form-control" id="ad" name="ad" value="@Model.Ad" required />
+                </div>
+                <div class="mb-3">
+                    <label for="soyad" class="form-label">Soyad</label>
+                    <input type="text" class="form-control" id="soyad" name="soyad" value="@Model.Soyad" required />
+                </div>
+                <button type="submit" class="btn btn-success">Güncelle</button>
+                <a href="/Ogrenci/OgrenciListe" class="btn btn-secondary">Öğrenci Listesine Dön</a>
+            </form>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <div id="sonucMesaji" class="alert" style="display:none;"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+           
+            $("#ogrenciDetayForm").on("submit", function(e) {
+                e.preventDefault();
+                
+                const ogrenci = {
+                    ogrenciid: $("#ogrenciId").val(),
+                    ad: $("#ad").val(),
+                    soyad: $("#soyad").val()
+                };
+                
+                $.ajax({
+                    url: "/Ogrenci/OgrenciGuncelleAjax",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(ogrenci),
+                    success: function(response) {
+                        if (response.success) {
+                            $("#sonucMesaji").removeClass("alert-danger").addClass("alert-success");
+                            $("#sonucMesaji").html(response.message);
+                            $("#sonucMesaji").show();
+                        } else {
+                            $("#sonucMesaji").removeClass("alert-success").addClass("alert-danger");
+                            $("#sonucMesaji").html(response.message);
+                            $("#sonucMesaji").show();
+                        }
+                    },
+                    error: function(error) {
+                        console.log("Hata oluştu:", error);
+                        $("#sonucMesaji").removeClass("alert-success").addClass("alert-danger");
+                        $("#sonucMesaji").html("Öğrenci güncellenirken bir hata oluştu.");
+                        $("#sonucMesaji").show();
+                    }
+                });
+            });
+        });
+    </script>
+}
+
